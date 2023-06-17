@@ -23,7 +23,7 @@ def get_prompt(u_i: str,
     return prompt
 
 
-def gen_response(prompt, task="sentiment analysis"):
+def gen_response(prompt, task="sentiment analysis", engine="gpt-3.5-turbo-0301"):
     if task == "sentiment analysis":
         sys_content = "You are an expert in sentiment analysis." \
                       + "Please predict the emotion labels for the current utterance given its head and dependent utterances and the relation types."\
@@ -36,7 +36,7 @@ def gen_response(prompt, task="sentiment analysis"):
         sys_content = ""
 
     completion = openai.ChatCompletion.create(
-        model="gpt-3.5-turbo-0301",
+        model= engine,
         messages=[
         {"role": "system", "content": sys_content},
         {"role": "user", "content": prompt}],
